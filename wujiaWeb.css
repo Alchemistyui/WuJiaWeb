@@ -21,7 +21,7 @@ nav ul {
 	background-color: aliceblue;
 	margin: 0px 0px 0px 0px;
 	list-style-type: none;
-	padding: 8px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	height: 40px;
 	text-align: center;
 	text-align-last: center;
@@ -38,7 +38,7 @@ nav ul li a:link, nav ul li a:visited {
 	text-align: center;
 	display: inline;
 	text-transform: uppercase;
-	padding: 8px;
+	padding: 6px;
 	font-weight: bold;
     border-bottom: none;
 }
@@ -51,6 +51,22 @@ border:1px solid gray;
 color:gray;
 background:#FFF;
 }
+
+
+
+
+#regist {
+	display: block;
+	float: right;
+	padding: 5px;
+}
+
+#forget {
+	display: block;
+	float: left;
+	padding: 5px;
+}
+
 
 
 #my_module ul {

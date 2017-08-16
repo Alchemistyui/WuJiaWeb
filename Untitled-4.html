@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<script> 
+	
+function edit(column){ 
+	alert(column.parentNode.parentNode.parentNode.parentNode.firstElementChild.id)
+   if(column.parentNode.parentNode.parentNode.parentNode.firstElementChild.innerHTML==='保存') {
+	   column.style.color = "blue"; 
+	   var input = document.createElement("input" ); 
+       input.type = "text" ;
+       input.id = "inputText" ;
+	   const value = column.innerHTML;
+       input.value = value ;
+	   input.disabled = false;
+	   column.appendChild(input);
+	   column.removeChild(column.firstChild);
+   }
+	
+} 
+	
+	
+<!--trLineNumber为动态表格行数，tdData为动态表格每行单元格的数据，数据类型为数组--> 
+function setTable(trCowNumber,tdData){ 
+	
+   var _table = document.getElementById("table"); 
+   var _row; 
+   var _cell;
+   var num = 0;
+   for (var i = 0; num < tdData.length; i++) { 
+     _row = document.createElement("tr"); 
+     document.getElementById("table").appendChild(_row); 
+     for(var j = 0; j < trCowNumber; j++) { 
+        _cell = document.createElement("td"); 
+		_cell.time = 0;
+        _cell.onclick= function(){if(this.time===0){edit(this); this.time++;}}  //为每个单元格增加单击事件 
+        _cell.innerText = tdData[num]; 
+        _row.appendChild(_cell); 
+	    num++;
+     }
+   }
+}
+	
+function change(btn) {
+	if (btn.innerHTML==='编辑'){
+	   btn.innerHTML = '保存';
+	}
+	else{
+		btn.innerHTML = '编辑';
+		//后台发送数据
+	}
+}
+ 
+</script> 
+
+</head>
+
+<body> 
+<div id = "emm">
+<button class="edit" onClick="change(this)"  >编辑</button>
+<label style="font-size:20px;width:600px;" >动态表格：</label><br/> 
+<table border="1" > 
+<tr>
+	<th>11</th>
+	<th>22</th>
+	<th>33</th>
+</tr>
+	<tbody id="table"></tbody>
+</table> 
+
+<button onClick="setTable(3, [1,2,3,4,5,6,7,8,9])" >dian</button>
+
+</div>
+</body> 
+
+</html>

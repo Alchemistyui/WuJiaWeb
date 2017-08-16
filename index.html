@@ -2,8 +2,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>账户管理</title>
+<title>登录</title>
 <link href="wujiaWeb.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	
+	function validateNonEmpty(inputField, helpText) {
+        // See if the input value contains any text
+        return validateRegEx(/.+/,
+          inputField.value, helpText,
+          "Please enter a value.");
+      }
+	
+	function validateRegEx(regex, input, helpText, helpMessage) {
+        // See if the input data validates OK
+        if (!regex.test(input)) {
+          // The data is invalid, so set the help message and return false
+          if (helpText != null)
+            helpText.innerHTML = helpMessage;
+          return false;
+        }
+        else {
+          // The data is OK, so clear the help message and return true
+          if (helpText != null)
+            helpText.innerHTML = "";
+          return true;
+        }
+      }
+
+	
+	function validateName(inputField, helpText) {
+        // First see if the input value contains data
+        if (!validateNonEmpty(inputField, helpText))
+          return false;
+
+        // Then see if the input value is a phone number
+        return (validateRegEx(/^\d{3}\d{4}\d{4}$/,
+          inputField.value, helpText,
+          "请输入电话号码或邮箱") | validateRegEx(/^[\w\.-_\+]+@[\w-]+(\.\w{2,3})+$/,
+          inputField.value, helpText,
+          "请输入电话号码或邮箱"));
+      }
+
+	
+	function validatePassword(minLength, maxLength, inputField, helpText) {
+		return validateRegEx(new RegExp("^.{" + minLength + "," + maxLength + "}$"),
+          inputField.value, helpText,
+          "Please enter a value " + minLength + " to " + maxLength +
+          " characters in length.");
+	}
+	
+	function check(form) {
+		if (validateName(form["name"], form["name_help"])  && validatePassword(1, 16, form["password"], form["password_help"]) ) {
+			form.submit();
+		}
+		else {
+          alert("I'm sorry but there is something wrong with the order information.");
+        }
+		
+		return "location.href='filename.html'";
+
+}
+</script>
+	
 </head>
 
 <body>
@@ -12,76 +72,32 @@
     	<div class="nav_col">   
     	 <nav>
     	   <ul>
-    	    <li><img src="images/logo.png" alt="myLogo" id="logo"></li>
-			<li><a href="index.html">账户管理</a></li>
-			<li><a href="xiaoquguanli.html">小区管理</a></li>
-			<li><a href="cheweiguanli.html">车位管理</a></li>
-			<li><a href="wuyeguanli.html">物业管理</a></li>
-			<li><a href="yuangongguanli.html">员工管理</a></li>
+			   <li><img src="images/logo.png" alt="myLogo" id="logo"></li>
+			<li>账户管理</li>
+			<li>小区管理</li>
+			<li>车位管理</li>
+			<li>物业管理</li>
+			<li>员工管理</li>
 		   </ul>
 		</nav>
       </div>
     </div>	
   </header>
-  <aside>
-  	<table class="menu">
-  		<tr>
-  			<td><a href="#community">我的小区</a></td>
-  		</tr>
-  		<tr>
-			<td><a href="#my_module">我的模块</a></td>
-  		</tr>
-  	</table>
-  </aside>
   
   
 <main>
-  	<section class="module" id="community">
-  		<p class="module_name">我的小区
-  		<a href="#" class="guanli">管理</a>
-		</p>
-  		<table class="module">
-  			<tr>
-  				<th>小区名称</th>
-  				<th>管理人员</th>
-  				<th>入驻人数</th>
-  				<th>客服人员</th>
-			</tr>
-  	        <tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  			<tr>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  				<td></td>
-  			</tr>
-  		</table>
-  	</section>
-  	
-  	<section class="my_module" id="my_module">
-  	    <p class="module_name">我的模块
-  	    <a href="#" class="add_module"> + </a>  </p>
-  	    <table>
-  	    	<tr>
-  	    		<td><div class="bought_module">
-    	                 <img src="images/module.png" alt="module">module
- 	    	    </div></td>
- 	    	    <td><div class="bought_module">
-    	                 <img src="images/module.png" alt="module">module
- 	    	    </div></td>
- 	    	    <td><div class="bought_module">
-    	                 <img src="images/module.png" alt="module">module
- 	    	    </div></td>
- 	    	    <td><div class="bought_module">
-    	                 <img src="images/module.png" alt="module">module
- 	    	    </div></td>
-  	    	</tr>
-  	    </table>
-  	</section>
+  	<form method="post" action="form_action.asp" name="log_in" style="text-align: center; margin:0 auto; width: 300px; height: 200px;">
+		 <p>账户: <input type="text" name="name" id="name" style="width: 250px; height: 20px;" onblur="validateName(this, document.getElementById('name_help'))" />
+           <span id="name_help" class="help"></span></p>
+            
+         <p>密码: <input type="password" id="password" name="password" style="width: 250px; height: 20px;" onblur="validatePassword(1, 16, this, document.getElementById('password_help'))" />
+         <span id="password_help" class="help"></span></p>
+         
+         <p><a href="wangjimima.html" id="forget">忘记密码？</a>
+         <a href="zhuce.html" id="regist">注册</a></p>
+         
+         <input type="submit" value="登录" class="submit" style="width: 300px; height: 50px; background-color: white; font-size: 15px;" onclick="check(this.form);"/>
+  	</form>
   </main>
   
 

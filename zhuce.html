@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<link href="wujiaWeb.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+    <div class="nav_row">
+    	<div class="nav_col">   
+    	 <nav>
+    	   <ul>
+			   <li><img src="images/logo.png" alt="myLogo" id="logo"></li>
+			<li><a href="zhanghuguanli.html">账户管理</a></li>
+			<li><a href="xiaoquguanli.html">小区管理</a></li>
+			<li><a href="cheweiguanli.html">车位管理</a></li>
+			<li><a href="wuyeguanli.html">物业管理</a></li>
+			<li><a href="yuangongguanli.html">员工管理</a></li>
+		   </ul>
+		</nav>
+      </div>
+    </div>	
+  </header>
+  
+  <main>
+  	<form method="post" action="zhanghuguanli.html" name="zhuce" style="text-align: center; margin:0 auto; width: 300px; height: 200px;">
+		 <p>设置账号: <input type="text" name="name" style="width: 220px; height: 20px;" placeholder="手机号/邮箱" /></p>
+         <p>设置密码: <input type="password" name="password" style="width: 220px; height: 20px;"/></p>
+         <p>确认密码: <input type="password" name="repassword" style="width: 220px; height: 20px;"/></p>
+         
+         <p>验证码：<input type="text" style="height: 20px;"> <input type="submit" value="获取验证码"></p>
+         <input type="submit" value="注册" class="submit" style="width: 300px; height: 50px; background-color: white; font-size: 15px;"/>
+  	</form>
+  </main>
+  
+</body>
+</html>
